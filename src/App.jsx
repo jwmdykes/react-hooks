@@ -59,11 +59,11 @@ function App() {
 
   return (
     <>
-      <h1>Todo List</h1>
+      <h1>To Do List</h1>
 
       <div className="new-todo-input">
-        <input type="text" placeholder="Add new todo item" ref={ref} />
-        <button onClick={handleNewTodo}>Add Todo</button>
+        <input type="text" placeholder="Add new to do item" ref={ref} />
+        <button onClick={handleNewTodo}>Add To Do</button>
       </div>
 
       <ul className="todo-list">
