@@ -22,6 +22,10 @@ function useTodos() {
   const [todos, setTodos] = useState([]);
   const ref = useRef();
   useEffect(() => {
+    ref.current.focus();
+  }, []);
+
+  useEffect(() => {
     async function fetchInitialTodos() {
       const response = await fetch(
         'https://todos-api.98johndykes.workers.dev/'
@@ -47,7 +51,6 @@ function useTodos() {
     () => todos.toSorted((a, b) => a.task.localeCompare(b.task)),
     [todos]
   );
-  console.log(sortedTodos);
   return { todos: sortedTodos, ref, handleNewTodo };
 }
 
