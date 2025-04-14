@@ -36,7 +36,24 @@ function useTodos() {
     fetchInitialTodos();
   }, []);
 
-  const handleNewTodo = useCallback(() => {
+  function toggleTodo(id) {
+    setTodos((todos) => {
+      const newTodos = todos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            isComplete: !todo.isComplete,
+          };
+        } else {
+          return todo;
+        }
+      });
+
+      return newTodos;
+    });
+  }
+
+  const addTodo = useCallback(() => {
     setTodos((todos) => [
       ...todos,
       {
@@ -51,11 +68,12 @@ function useTodos() {
     () => todos.toSorted((a, b) => a.task.localeCompare(b.task)),
     [todos]
   );
-  return { todos: sortedTodos, ref, handleNewTodo };
+
+  return { todos: sortedTodos, ref, addTodo, toggleTodo };
 }
 
 function App() {
-  const { todos, ref, handleNewTodo } = useTodos();
+  const { todos, ref, addTodo, toggleTodo } = useTodos();
 
   return (
     <>
@@ -63,12 +81,18 @@ function App() {
 
       <div className="new-todo-input">
         <input type="text" placeholder="Add new to do item" ref={ref} />
-        <button onClick={handleNewTodo}>Add To Do</button>
+        <button onClick={addTodo}>Add New</button>
       </div>
 
       <ul className="todo-list">
         {todos.map((todo) => (
-          <Todo key={todo.id}>{todo.task}</Todo>
+          <Todo
+            key={todo.id}
+            checked={todo.isComplete}
+            onChange={() => toggleTodo(todo.id)}
+          >
+            {todo.task}
+          </Todo>
         ))}
       </ul>
     </>
