@@ -1,15 +1,24 @@
-import { useState, useRef, useEffect } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  useId,
+  useMemo,
+  useCallback,
+} from 'react';
 
 function Todo({ children, ...props }) {
+  const id = useId();
+
   return (
     <li>
-      <input type="checkbox" id="todo" {...props} />
-      <label htmlFor="todo">{children}</label>
+      <input type="checkbox" id={id} {...props} />
+      <label htmlFor={id}>{children}</label>
     </li>
   );
 }
 
-function App() {
+function useTodos() {
   const [todos, setTodos] = useState([]);
   const ref = useRef();
   useEffect(() => {
@@ -23,8 +32,8 @@ function App() {
     fetchInitialTodos();
   }, []);
 
-  function handleNewTodo() {
-    setTodos([
+  const handleNewTodo = useCallback(() => {
+    setTodos((todos) => [
       ...todos,
       {
         id: todos.length + 1,
@@ -32,7 +41,18 @@ function App() {
         isComplete: false,
       },
     ]);
-  }
+  }, []);
+
+  const sortedTodos = useMemo(
+    () => todos.toSorted((a, b) => a.task.localeCompare(b.task)),
+    [todos]
+  );
+  console.log(sortedTodos);
+  return { todos: sortedTodos, ref, handleNewTodo };
+}
+
+function App() {
+  const { todos, ref, handleNewTodo } = useTodos();
 
   return (
     <>
