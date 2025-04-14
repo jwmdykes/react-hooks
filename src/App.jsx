@@ -9,14 +9,8 @@ function Todo({ children, ...props }) {
   );
 }
 
-const initialTodos = [
-  { id: 1, task: 'Wash the dishes', isComplete: false },
-  { id: 2, task: 'Do your homework', isComplete: false },
-  { id: 3, task: 'Play videogames', isComplete: true },
-];
-
 function App() {
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useState([]);
   const ref = useRef();
   useEffect(() => {
     async function fetchInitialTodos() {
