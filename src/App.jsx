@@ -2,10 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 
 function Todo({ children, ...props }) {
   return (
-    <div>
+    <li>
       <input type="checkbox" id="todo" {...props} />
       <label htmlFor="todo">{children}</label>
-    </div>
+    </li>
   );
 }
 
@@ -43,11 +43,11 @@ function App() {
         <button onClick={handleNewTodo}>Add Todo</button>
       </div>
 
-      <div className="todo-container">
+      <ul className="todo-list">
         {todos.map((todo) => (
           <Todo key={todo.id}>{todo.task}</Todo>
         ))}
-      </div>
+      </ul>
     </>
   );
 }

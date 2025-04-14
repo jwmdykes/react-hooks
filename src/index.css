@@ -65,33 +65,33 @@ button:active {
   box-shadow: none;
 }
 
-.todo-container {
+.todo-list {
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   padding: 1.4rem;
 }
 
-.todo-container > div {
+.todo-list > li {
   display: flex;
   gap: 1.5rem;
 }
 
-.todo-container > div:not(:last-child) {
+.todo-list > li:not(:last-child) {
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid hsl(0, 0%, 82%);
 }
 
-.todo-container > div > label {
+.todo-list > li > label {
   font-size: 1.2rem;
   color: hsl(0, 0%, 15%);
 }
 
-.todo-container > div > label:hover {
+.todo-list > li > label:hover {
   cursor: pointer;
 }
 
-.todo-container > div > input {
+.todo-list > li > input {
   transform: scale(2.2);
 }
